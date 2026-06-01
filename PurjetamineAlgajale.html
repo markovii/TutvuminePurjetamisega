@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VENUS — Perepurjetamise käsiraamat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,500&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16243a; --ink-soft:#3a4a63;
+    --paper:#f4ece0; --paper-2:#ece1d0;
+    --line:#cdbfa6;
+    --brass:#b07b34; --brass-deep:#8a5d24;
+    --sea:#1f5d6b; --sea-light:#dbe9e8;
+    --signal:#b1452f; --sun:#d9a441;
+    --green:#2f7d52;
+    --max:940px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(176,123,52,.07), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(31,93,107,.06), transparent 45%),
+      var(--paper);
+    color:var(--ink);
+    font-family:"Spectral",Georgia,serif;
+    font-size:18px; line-height:1.74;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--max);margin:0 auto;padding:0 22px 90px}
+
+  .cover{text-align:center;padding:64px 20px 30px;border-bottom:3px double var(--line)}
+  .kicker{font-family:"Fraunces",serif;letter-spacing:.42em;text-transform:uppercase;font-size:.72rem;color:var(--brass-deep);font-weight:600}
+  .cover h1{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(2.6rem,8vw,4.6rem);line-height:.96;margin:.18em 0 .12em}
+  .cover .sub{font-style:italic;color:var(--ink-soft);font-size:1.12rem;margin:0 auto;max-width:600px}
+  .vessel{margin-top:22px;font-family:"Fraunces",serif;font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--sea)}
+  .compass{width:108px;height:108px;margin:14px auto 0;display:block}
+
+  .note{background:linear-gradient(180deg,#fbf6ec,#f1e7d6);border:1px solid var(--line);border-left:5px solid var(--brass);border-radius:4px;padding:18px 22px;margin:30px 0;font-size:.98rem}
+  .note strong{font-family:"Fraunces",serif}
+
+  .toc{margin:34px 0 10px}
+  .toc h2{font-family:"Fraunces",serif;font-size:1.05rem;letter-spacing:.12em;text-transform:uppercase;color:var(--brass-deep);border:0;margin:0 0 12px;padding:0}
+  .toc ol{columns:2;column-gap:40px;list-style:none;counter-reset:t;padding:0;margin:0}
+  .toc li{counter-increment:t;break-inside:avoid;margin:0 0 7px;padding-left:34px;position:relative}
+  .toc li::before{content:counter(t,decimal-leading-zero);position:absolute;left:0;top:0;font-family:"Fraunces",serif;color:var(--brass);font-weight:600;font-size:.82rem}
+  .toc a{color:var(--ink);text-decoration:none;border-bottom:1px dotted var(--line)}
+  .toc a:hover{color:var(--sea)}
+  @media(max-width:620px){.toc ol{columns:1}}
+
+  .part-label{font-family:"Fraunces",serif;letter-spacing:.34em;text-transform:uppercase;font-size:.74rem;color:var(--signal);font-weight:600;margin-top:64px}
+  h2.sec{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(1.7rem,4.5vw,2.5rem);line-height:1.04;margin:.1em 0 .5em;border-bottom:3px double var(--line);padding-bottom:.28em}
+  h3{font-family:"Fraunces",serif;font-weight:600;font-size:1.34rem;margin:1.9em 0 .4em;display:flex;align-items:baseline;gap:.5em}
+  h3 .n{color:var(--brass);font-size:.92rem;font-weight:600}
+  h4{font-family:"Fraunces",serif;font-weight:600;font-size:1.06rem;margin:1.3em 0 .2em;color:var(--sea)}
+  p{margin:.7em 0}
+  a{color:var(--sea)}
+  strong{color:var(--ink)}
+  .lead{font-size:1.08rem;color:var(--ink-soft)}
+
+  dl.terms{margin:.6em 0;display:grid;grid-template-columns:max-content 1fr;gap:5px 18px}
+  dl.terms dt{font-family:"Fraunces",serif;font-weight:600;color:var(--brass-deep)}
+  dl.terms dd{margin:0;color:var(--ink-soft)}
+  @media(max-width:560px){dl.terms{grid-template-columns:1fr;gap:0}dl.terms dt{margin-top:.5em}}
+
+  ul.clean{margin:.5em 0;padding-left:1.2em}
+  ul.clean li{margin:.35em 0}
+
+  figure{margin:26px 0;background:#fff;border:1px solid var(--line);border-radius:6px;padding:18px 16px 12px;box-shadow:0 8px 22px -16px rgba(22,36,58,.4)}
+  figure svg{width:100%;height:auto;display:block}
+  figure img.netimg{width:100%;max-width:560px;height:auto;display:block;margin:0 auto;background:#fff;border-radius:4px}
+  table.rules{width:100%;border-collapse:collapse;margin:14px 0;font-size:.95rem}
+  table.rules th,table.rules td{border:1px solid var(--line);padding:8px 12px;text-align:left;vertical-align:top}
+  table.rules th{background:var(--paper-2);font-family:"Fraunces",serif;font-weight:600}
+  table.rules td b{color:var(--sea)}
+  figcaption{font-size:.86rem;color:var(--ink-soft);font-style:italic;text-align:center;margin-top:12px;max-width:700px;margin-left:auto;margin-right:auto}
+
+  .box{border:1px solid var(--line);border-radius:5px;padding:14px 18px;margin:18px 0}
+  .box.tip{background:var(--sea-light);border-left:5px solid var(--sea)}
+  .box.warn{background:#f7e3dc;border-left:5px solid var(--signal)}
+  .box.myth{background:#f3ead4;border-left:5px solid var(--sun)}
+  .box.learn{background:#eef3ec;border-left:5px solid var(--green)}
+  .box .bt{font-family:"Fraunces",serif;font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:.78rem;display:block;margin-bottom:3px}
+  .box.tip .bt{color:var(--sea)} .box.warn .bt{color:var(--signal)} .box.myth .bt{color:var(--brass-deep)} .box.learn .bt{color:var(--green)}
+
+  .stage{border:1px solid var(--line);border-radius:6px;margin:16px 0;overflow:hidden;background:#fff}
+  .stage > summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;gap:14px;background:linear-gradient(180deg,#fbf6ec,#efe4d2)}
+  .stage > summary::-webkit-details-marker{display:none}
+  .stage .badge{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:var(--ink);color:var(--paper);font-family:"Fraunces",serif;font-weight:900;display:grid;place-items:center;font-size:1.1rem}
+  .stage[open] .badge{background:var(--sea)}
+  .stage .st-title{font-family:"Fraunces",serif;font-weight:600;font-size:1.12rem}
+  .stage .st-sub{font-size:.82rem;color:var(--ink-soft);font-style:italic}
+  .stage .chev{margin-left:auto;color:var(--brass);font-size:.9rem;font-family:"Fraunces",serif}
+  .stage[open] .chev::after{content:"sulge"} .stage:not([open]) .chev::after{content:"ava ▾"}
+  .stage .body{padding:6px 20px 18px}
+  .stage .cols{display:grid;grid-template-columns:1fr 1fr;gap:8px 28px}
+  @media(max-width:620px){.stage .cols{grid-template-columns:1fr}}
+  .ready{background:var(--sea-light);border-radius:4px;padding:8px 12px;margin-top:10px;font-size:.92rem}
+  .ready b{color:var(--sea)}
+  .learnrow{background:#eef3ec;border-radius:4px;padding:8px 12px;margin-top:10px;font-size:.92rem}
+  .learnrow b{color:var(--green)}
+
+  .res{border:1px solid var(--line);border-left:5px solid var(--brass);border-radius:5px;background:#fff;padding:14px 18px;margin:12px 0}
+  .res .rh{font-family:"Fraunces",serif;font-weight:600;font-size:1.06rem;margin:0}
+  .res .meta{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);margin:2px 0 8px}
+  .res .meta .flag{display:inline-block;background:var(--ink);color:var(--paper);padding:1px 7px;border-radius:3px;margin-right:6px;letter-spacing:.04em}
+  .res .flag.et{background:var(--sea)} .res .flag.en{background:var(--brass-deep)}
+  .res.star{border-left-color:var(--signal)}
+  .res p{margin:.4em 0;font-size:.95rem}
+  .res a{word-break:break-word}
+  .res ul{margin:.4em 0 .2em;padding-left:1.1em;font-size:.93rem}
+  .res ul li{margin:.2em 0}
+
+  hr.rope{border:0;height:14px;margin:48px 0;background:repeating-linear-gradient(90deg, transparent 0 6px, var(--line) 6px 9px, transparent 9px 18px);-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+
+  .footer{text-align:center;margin-top:70px;padding-top:24px;border-top:3px double var(--line);font-size:.82rem;color:var(--ink-soft)}
+  .back{display:inline-block;margin-top:8px;font-size:.78rem;color:var(--brass-deep);text-decoration:none}
+  .back:hover{color:var(--sea)}
+
+  svg text{font-family:"Spectral",serif}
+  .L{font-size:16px;fill:var(--ink)}
+  .Lb{font-family:"Fraunces",serif;font-weight:600;font-size:16px;fill:var(--ink)}
+  .Ls{font-size:13px;fill:var(--ink-soft)}
+  .lead-line{stroke:var(--ink-soft);stroke-width:1}
+  .dot{fill:var(--signal)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cover">
+    <div class="kicker">Pereraamat &middot; algajale meeskonnale</div>
+    <h1>Purjetamine</h1>
+    <p class="sub">Selge sissejuhatus purjetamise mõistetesse ja oskustesse — loetav kogu perele, koolituskava skipperile.</p>
+    <svg class="compass" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="var(--brass)" stroke-width="1.4"/>
+      <circle cx="50" cy="50" r="38" fill="none" stroke="var(--line)" stroke-width="1"/>
+      <g fill="var(--ink)">
+        <polygon points="50,8 56,50 50,46 44,50"/>
+        <polygon points="50,92 44,50 50,54 56,50" fill="var(--brass)"/>
+        <polygon points="8,50 50,44 46,50 50,56"/>
+        <polygon points="92,50 50,56 54,50 50,44"/>
+      </g>
+      <circle cx="50" cy="50" r="3" fill="var(--signal)"/>
+      <text x="50" y="6" text-anchor="middle" font-family="Fraunces" font-size="7" fill="var(--ink)">N</text>
+    </svg>
+    <div class="vessel">VENUS &middot; Ridas 35 &middot; EST 319</div>
+  </header>
+
+  <div class="note">
+    <strong>Kuidas seda raamatut kasutada.</strong> 1. osa on selgitav lugemis- ja vaatamismaterjal — see ei loetle ainult mõisteid, vaid püüab seletada, <em>miks</em> asjad nii on. 2. osa on koolituskava: iga etapi juures on viide, kust seda teooriat õppida (1. osa ja valitud videod). 3. osas on väike, hoolikalt valitud kogum allikaid — pigem vähem ja õigeid kui palju ja laialivalguvaid.
+  </div>
+
+  <nav class="toc" id="ylesse">
+    <h2>Sisukord</h2>
+    <ol>
+      <li><a href="#osad">Purjeka osad</a></li>
+      <li><a href="#purjed">Purjed — liigid ja osad</a></li>
+      <li><a href="#otsad">Otsad, taglas ja sõlmed</a></li>
+      <li><a href="#puri">Kuidas puri töötab</a></li>
+      <li><a href="#tuul">Tegelik ja näiv tuul</a></li>
+      <li><a href="#kursid">Tuulekursid ja purje asend</a></li>
+      <li><a href="#manoovrid">Pautimine ja halssimine</a></li>
+      <li><a href="#trimm">Purjede seadistamine</a></li>
+      <li><a href="#sildumine">Sildumine ja ankrusse jäämine</a></li>
+      <li><a href="#ohutus">Ohutus ja teeandmine (COLREG)</a></li>
+      <li><a href="#kava">Koolituskava</a></li>
+      <li><a href="#materjalid">Materjalid ja videod</a></li>
+    </ol>
+  </nav>
+
+  <div class="part-label">Esimene osa &middot; Mõisted ja teooria</div>
+  <h2 class="sec">Lugemismaterjal</h2>
+  <p class="lead">Purjetamine pole jõu, vaid arusaamise asi. Kui mõistad, kuidas tuul paati liigutab ja mis nime mis asi kannab, muutub kõik ülejäänu lihtsaks. See osa selgitab põhitõed nii, et neid saaks ka ilma varasema kogemuseta jälgida.</p>
+
+  <!-- 1 PARTS -->
+  <h3 id="osad"><span class="n">01</span> Purjeka osad</h3>
+  <p>Enne mere peale minekut tasub teada, mis on mis. Tänapäevane purjekas (ka VENUS) on <strong>luup-taglasega</strong>: tal on üks mast ja kaks purje. Masti taga on suur <strong>grootpuri</strong> (suurpuri), masti ees aga <strong>foka</strong> — või väiksema tuulega selle asemel suurem <strong>genoa</strong>, mis ulatub mastist tahapoole. Mast püsib püsti kolme „traadi" — vöörstaagi, ahterstaagi ja vantide — najal. Vee all on raske <strong>kiil</strong>, mis hoiab paati püsti ega lase tuulel paati lihtsalt külili lükata.</p>
+  <p>Joonis näitab põhiosi nii, nagu need päris paadil paiknevad. Pane tähele, et <strong>poom</strong> on tekist madalal — see liigub purjetades pea kohal, mistõttu tema asukoht tasub kohe selgeks teha.</p>
+
+  <figure>
+    <svg viewBox="0 0 900 620" role="img" aria-label="Tänapäevase luubi osad, külgvaade">
+      <!-- water -->
+      <rect x="0" y="430" width="900" height="190" fill="var(--sea-light)"/>
+      <line x1="0" y1="430" x2="900" y2="430" stroke="var(--sea)" stroke-width="1.3" opacity=".5"/>
+
+      <!-- underwater hull (antifoul) -->
+      <path d="M168,430 C300,460 520,460 632,430 Z" fill="#b9a98c"/>
+      <!-- topsides / freeboard -->
+      <path d="M150,392 C300,384 500,386 642,400 L632,430 L168,430 C150,420 150,402 150,392 Z" fill="#f2ead9" stroke="var(--ink)" stroke-width="2.2"/>
+      <!-- boot stripe -->
+      <rect x="168" y="426" width="466" height="6" fill="var(--signal)" opacity=".55"/>
+      <!-- fin keel + bulb -->
+      <path d="M372,452 L382,548 L404,548 L414,452 Z" fill="#9c8c70" stroke="var(--ink)" stroke-width="1.6"/>
+      <ellipse cx="394" cy="554" rx="34" ry="10" fill="#7d6f57" stroke="var(--ink)" stroke-width="1.4"/>
+      <!-- spade rudder -->
+      <path d="M566,448 C563,484 564,512 572,524 C580,512 581,484 578,448 Z" fill="#9c8c70" stroke="var(--ink)" stroke-width="1.5"/>
+
+      <!-- mast -->
+      <line x1="330" y1="392" x2="330" y2="72" stroke="var(--ink)" stroke-width="5"/>
+      <rect x="325" y="66" width="10" height="8" fill="var(--ink)"/>
+      <!-- spreaders -->
+      <line x1="330" y1="232" x2="300" y2="236" stroke="var(--ink)" stroke-width="2.4"/>
+      <line x1="330" y1="232" x2="360" y2="236" stroke="var(--ink)" stroke-width="2.4"/>
+      <!-- boom (LOW, just above deck) -->
+      <line x1="330" y1="372" x2="505" y2="380" stroke="var(--ink)" stroke-width="5"/>
+      <!-- standing rigging -->
+      <line x1="330" y1="73" x2="155" y2="388" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <line x1="330" y1="73" x2="636" y2="398" stroke="var(--ink-soft)" stroke-width="1.5"/>
+      <polyline points="330,75 360,236 372,390" fill="none" stroke="var(--ink-soft)" stroke-width="1.4"/>
+
+      <!-- mainsail -->
+      <path d="M338,80 L338,370 L500,379 C503,300 482,172 338,80 Z" fill="#fdfaf3" stroke="var(--ink)" stroke-width="1.8"/>
+      <g stroke="var(--line)" stroke-width="1"><line x1="408" y1="150" x2="430" y2="156"/><line x1="392" y1="232" x2="452" y2="246"/><line x1="372" y1="312" x2="476" y2="333"/></g>
+      <!-- headsail (foka) -->
+      <path d="M322,96 L300,352 L172,384 Z" fill="#f1e8d6" stroke="var(--ink)" stroke-width="1.8"/>
+
+      <!-- deck details: coachroof, stanchions/lifelines, wheel -->
+      <path d="M360,392 L368,376 L470,378 L476,392 Z" fill="#e7dcc6" stroke="var(--ink)" stroke-width="1.2"/>
+      <g stroke="var(--ink)" stroke-width="1.2">
+        <line x1="210" y1="390" x2="210" y2="378"/><line x1="262" y1="389" x2="262" y2="377"/>
+        <line x1="520" y1="392" x2="520" y2="380"/><line x1="572" y1="394" x2="572" y2="382"/>
+        <line x1="208" y1="378" x2="264" y2="377" /><line x1="518" y1="380" x2="574" y2="382"/>
+      </g>
+      <circle cx="548" cy="388" r="8" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+
+      <!-- LABELS with leader lines -->
+      <line class="lead-line" x1="330" y1="120" x2="262" y2="58"/><text class="Lb" x="200" y="54">mast</text>
+      <line class="lead-line" x1="430" y1="220" x2="724" y2="180"/><text class="Lb" x="732" y="184">grootpuri</text>
+      <line class="lead-line" x1="250" y1="300" x2="120" y2="318"/><text class="Lb" x="36" y="322">foka / genoa</text>
+      <line class="lead-line" x1="470" y1="378" x2="724" y2="372"/><text class="Lb" x="732" y="376">poom</text>
+      <line class="lead-line" x1="232" y1="252" x2="120" y2="252"/><text class="Lb" x="40" y="256">vöörstaak</text>
+      <line class="lead-line" x1="510" y1="244" x2="724" y2="238"/><text class="Lb" x="732" y="242">ahterstaak</text>
+      <line class="lead-line" x1="360" y1="300" x2="724" y2="300"/><text class="Lb" x="732" y="304">vant</text>
+      <line class="lead-line" x1="360" y1="236" x2="640" y2="142"/><text class="Ls" x="648" y="146">saaling</text>
+      <line class="lead-line" x1="394" y1="540" x2="262" y2="572"/><text class="Lb" x="150" y="576">kiil</text>
+      <line class="lead-line" x1="573" y1="500" x2="700" y2="520"/><text class="Lb" x="708" y="524">roolileht</text>
+      <line class="lead-line" x1="600" y1="430" x2="760" y2="446"/><text class="Ls" x="768" y="450">veeliin</text>
+      <text class="L" x="120" y="412">vöör</text><line class="lead-line" x1="162" y1="408" x2="190" y2="396"/>
+      <text class="L" x="652" y="416">ahter</text><line class="lead-line" x1="648" y1="412" x2="624" y2="404"/>
+    </svg>
+    <figcaption><b>Pakpoord</b> = vasak parras, <b>tüürpoord</b> = parem parras — alati paadi enda suhtes, ükskõik kuhu sa ise vaatad. Maa-aluse osa moodustavad kiil (raskuse ja triivivastuse jaoks) ning eraldi seisev roolileht.</figcaption>
+  </figure>
+
+  <p>Mõned mõisted, mis kohe alguses kasulikud:</p>
+  <dl class="terms">
+    <dt>Vöör / ahter</dt><dd>paadi esiots / tagaots</dd>
+    <dt>Pakpoord / tüürpoord</dt><dd>vasak / parem parras (paadi enda suhtes)</dd>
+    <dt>Kiil</dt><dd>raske uim vee all — hoiab paadi püsti ja takistab külgsuunas libisemist (triivi)</dd>
+    <dt>Roolileht</dt><dd>rool vee all; seda juhitakse rooliratta või roolipinniga</dd>
+    <dt>Grootpuri</dt><dd>suur puri masti taga, alaserv poomi küljes</dd>
+    <dt>Foka / genoa</dt><dd>eespuri vöörstaagil; genoa on suurem ja ulatub mastist tahapoole</dd>
+    <dt>Vöörstaak / ahterstaak</dt><dd>masti ette / taha hoidev teras-ots</dd>
+    <dt>Vant</dt><dd>masti külgedele hoidev ots (läheb üle saalingu)</dd>
+    <dt>Fall</dt><dd>ots, millega puri <b>üles</b> heisatakse (grootfall, fokafall)</dd>
+    <dt>Soot</dt><dd>ots, millega purje <b>sisse/välja</b> seatakse (grootsoot, fokasoot)</dd>
+    <dt>Vints</dt><dd>mehaaniline vahend, mis aitab pingul otsa hõlpsamalt pingutada (ei ole ots ega tross)</dd>
+    <dt>Knaap</dt><dd>sarvedega kinnitusklots, mille külge ots kinnitatakse</dd>
+    <dt>Halsi-/soodi-/vallinurk</dt><dd>purje kolm nurka: vööripoolne all / ahtripoolne all / ülemine</dd>
+    <dt>Rehv</dt><dd>purjepinna vähendamine tugevama tuulega (tegevus = rehvimine)</dd>
+  </dl>
+  <div class="box learn"><span class="bt">Kus seda õppida</span>Eesti keeles seleta osad lahti <a href="https://purjetamine.com/eng/millest-koosneb-purjekas/" target="_blank" rel="noopener">purjetamine.com „Millest koosneb purjekas?"</a> ja <a href="https://alarvolmersailing.ee/hakkame-purjetama" target="_blank" rel="noopener">Alar Volmer „Hakkame purjetama!"</a>. Päris paadi peal otsi need osad joonise järgi üles — nii jäävad nad iseenesest meelde.</div>
+
+  <!-- 2 KNOTS -->
+  <h3 id="purjed"><span class="n">02</span> Purjed — liigid ja osad</h3>
+  <p>Puri on purjeka mootor, ja tasub teada nii erinevaid <strong>purjeliike</strong> kui ka seda, <strong>mis osadest puri koosneb</strong> — just kindlate nurkade külge kinnitatakse kindlad otsad.</p>
+  <h4>Purjeliigid</h4>
+  <dl class="terms">
+    <dt>Grootpuri (suurpuri)</dt><dd>peamine puri masti taga, alaserv poomi küljes; töötab kõigil kurssidel.</dd>
+    <dt>Foka</dt><dd>eespuri, mis ei ulatu mastist tahapoole; sobib tugevamasse tuulde.</dd>
+    <dt>Genoa</dt><dd>suurem eespuri, mis kattub mastiga ja ulatub sellest taha; annab kergema tuulega rohkem jõudu.</dd>
+    <dt>Spinnaker</dt><dd>suur, õhupallitaoline pärituulepuri täis- ja pärituuleks.</dd>
+    <dt>Genaker / asümmeetriline</dt><dd>spinnakeri ja genoa vahepealne pärituulepuri; lihtsam käsitseda.</dd>
+    <dt>Tormipurjed</dt><dd>väikesed, tugevad purjed väga kõva tuule jaoks.</dd>
+  </dl>
+  <h4>Purje osad: kolm serva (liiki) ja kolm nurka</h4>
+  <p>Servasid nimetatakse <strong>liikideks</strong>, nurki kasutatakse <strong>kinnituskohtadena</strong> — igal nurgal on oma ülesanne.</p>
+  <dl class="terms">
+    <dt>Esiliik (luff)</dt><dd>purje <b>esiserv</b> (masti/vöörstaagi pool). Tuul kohtab seda esimesena ja siit hakkab puri esimesena laperdama, kui ta on liiga lõdvalt seatud.</dd>
+    <dt>Tagaliik (leech)</dt><dd>purje tagaserv, ahtri pool.</dd>
+    <dt>Alaliik (foot)</dt><dd>purje alaserv; grootpurjel poomi küljes.</dd>
+    <dt>Vallinurk (ülemine)</dt><dd>purje tipp — siia kinnitub <b>fall</b>, millega puri üles heisatakse.</dd>
+    <dt>Halsinurk (all ees)</dt><dd>vööripoolne alanurk — kinnitatud paadi/poomi külge.</dd>
+    <dt>Soodinurk (all taga)</dt><dd>ahtripoolne alanurk — siia kinnitub <b>soot</b>, millega purje seatakse.</dd>
+  </dl>
+  <p>Lisaks: <strong>latid</strong> (jäigastavad pulgad tagaliigis), <strong>roach</strong> (tagaliigi väljakumerdus), <strong>rehvisilmad</strong> (purjepinna vähendamiseks) ja <strong>niidikesed</strong> (õhuvoolu näitavad lõngad).</p>
+  <div class="box learn"><span class="bt">Kus seda õppida</span>Selgete piltidega: <a href="https://americansailing.com/articles/understanding-sailboats-the-sails/" target="_blank" rel="noopener">American Sailing „The Sails"</a> ja <a href="https://improvesailing.com/sailboat/parts-of-a-sail-explained" target="_blank" rel="noopener">Improve Sailing „Parts of a Sail"</a>. Eesti k. <a href="https://purjetamine.com/eng/millest-koosneb-purjekas/" target="_blank" rel="noopener">purjetamine.com</a>.</div>
+
+  <h3 id="otsad"><span class="n">03</span> Otsad, taglas ja sõlmed</h3>
+  <p>Merel ei öelda „köis" — öeldakse <strong>ots</strong>. Kõiki otsi ja traate koos nimetatakse <strong>taglaseks</strong>: <strong>seisev taglas</strong> (vöörstaak, ahterstaak, vandid) hoiab masti püsti ega liigu; <strong>jooksev taglas</strong> (fallid ja soodid) liigub ja seda käsitsetakse.</p>
+  <h4>Fallid ja soodid — mis ja milleks</h4>
+  <dl class="terms">
+    <dt>Fall (heiseots)</dt><dd>tõstab purje <b>üles</b>. Kinnitub purje <b>vallinurka</b>, jookseb mööda masti üles ja alla, pingutatakse (sageli vintsiga). Grootfall, fokafall. Kasutad heiskamisel/langetamisel.</dd>
+    <dt>Soot (seadeots)</dt><dd>seab purje <b>nurga tuule suhtes</b> — tõmbab sisse või laseb välja. Kinnitub purje <b>soodinurka</b>, jookseb kokpitti. Grootsoot, fokasoot. Kasutad pidevalt sõidu ajal.</dd>
+  </dl>
+  <p>Lihtne meeldetuletus: <strong>fall = üles-alla, soot = sisse-välja.</strong> Abivahendid: <strong>vints</strong> (mehaaniline ratas otsa pingutamiseks), <strong>knaap</strong> (sarvedega klots otsa kinnitamiseks), ning grootpurje juures <strong>dirk</strong> (hoiab poomi üleval), <strong>aluslii/outhaul</strong> (pingutab alaliiki) ja <strong>kraanlik/vang</strong> (surub poomi alla).</p>
+  <h4>Kuus sõlme, mis selgeks õppida</h4>
+  <p>Igal tööl on oma sõlm. Neid saab harjutada juba kodus, ilma paadita — eesmärk on, et tuleksid välja ka pimedas ja vihmas.</p>
+  <dl class="terms">
+    <dt><a href="https://www.animatedknots.com/bowline-knot" target="_blank" rel="noopener">1. Paalisõlm</a></dt><dd>moodustab otsa otsa <b>kindla silmuse</b>, mis ei tõmbu kokku ega hargne, kuid avaneb ka pärast suurt koormust. Universaalseim sõlm — „sõlmede kuningas".</dd>
+    <dt><a href="https://www.animatedknots.com/figure-8-knot" target="_blank" rel="noopener">2. Kaheksasõlm</a></dt><dd><b>stoppersõlm</b> otsa otsa, et see ei lipsaks ploki ega knaabi vahelt välja. Nimi tuleb kaheksakujulisest silmusest; läheb pärast koormust kergesti lahti.</dd>
+    <dt><a href="https://www.animatedknots.com/round-turn-two-half-hitches-knot" target="_blank" rel="noopener">3. Täiskeerd ja kaks poolsteeki (poolsõlme)</a></dt><dd>otsa kinnitamine posti, rõnga, reelingu või ankru külge. <b>Täiskeerd</b> = terve ring ümber eseme (võtab koormuse vastu), siis <b>kaks poolsteeki</b> ümber põhiotsa (lukustavad). Kannab koormust juba enne lukustamist ja avaneb hiljem kergesti. (Õigem termin on „poolsteek/poolsõlm", mitte „lihtsõlm".)</dd>
+    <dt><a href="https://www.animatedknots.com/square-knot" target="_blank" rel="noopener">4. Rehvisõlm (õigesõlm)</a></dt><dd>kahe <b>ühejämeda</b> otsa sidumiseks ja purje rehvimisel rehvipaelte sidumiseks. Ei sobi koormust kandvaks ühenduseks.</dd>
+    <dt><a href="https://www.animatedknots.com/clove-hitch-knot-rope-end" target="_blank" rel="noopener">5. Veebling (seasõrg)</a></dt><dd>otsa kiire kinnitamine <b>siledale ümarale postile, reelingule või vandi külge</b>. <b>Just sellega riputatakse vendrid</b> reelingu külge — kõrgust saab kiiresti muuta.</dd>
+    <dt><a href="https://www.animatedknots.com/cleat-hitch-halyard-knot" target="_blank" rel="noopener">6. Knaabikinnitus</a></dt><dd>otsa kinnitamine knaabi: üks <b>täiskeerd</b> ümber knaabi (võtab koormuse), siis paar kaheksakujulist lüket üle sarvede ja lõpetuseks lukustav lüke.</dd>
+  </dl>
+  <div class="box tip"><span class="bt">Vendisõlm</span>Vendri kinnitamiseks reelingu külge sobib veebling (seasõrg); lõppu lisatakse sageli lukustav poolsõlm, et see kindlasti ei vabaneks — seda kombinatsiooni nimetataksegi tihti vendisõlmeks.</div>
+  <div class="box learn"><span class="bt">Kus seda õppida</span>Sõlmed on puhtalt visuaalsed — keel ei sega. <a href="https://www.animatedknots.com/boating-knots" target="_blank" rel="noopener">Animated Knots by Grog</a> ja <a href="https://americansailing.com/learn-to-sail/videos/knots-made-easy/" target="_blank" rel="noopener">American Sailing „Knots Made Easy"</a>. Eesti nimed: <a href="https://mereviki.vta.ee/mediawiki/index.php/S%C3%B5lmed" target="_blank" rel="noopener">Mereviki „Sõlmed"</a>. Kui mõni link ei avane, on kõik need sõlmed koos siin: <a href="https://www.animatedknots.com/scouting-knots" target="_blank" rel="noopener">animatedknots.com/scouting-knots</a>.</div>
+
+  <!-- 3 HOW SAIL WORKS -->
+  <h3 id="puri"><span class="n">04</span> Kuidas puri töötab</h3>
+  <p>Pärituules — kui tuul puhub otse tagant — on lihtne: puri on nagu <strong>langevari</strong>, tuul lükkab seda ja paat liigub edasi. Huvitav osa algab siis, kui tuul tuleb küljelt või isegi poolviltu eest. Siis töötab puri nagu <strong>lennukitiib</strong>: kumeraks paisunud puri suunab temast mööduva õhuvoolu kõrvale, ja vastusurvena tekib purjele jõud, mis on suunatud umbes risti purjega, allatuule poole.</p>
+  <p>See jõud ei oleks üksi kasulik — see üritab paati pigem külili lükata kui edasi viia. Võti peitub <strong>kiilus</strong>. Kuna kiil takistab külgsuunas libisemist, „lubab" paat liikuda peaaegu ainult ühes suunas: edasi. Nii muundubki purje jõud suures osas edasiliikumiseks. Just seetõttu suudab purjekas sõita isegi poolviltu tuulele vastu — mitte otse vastu, vaid teravnurga all.</p>
+  <p>Joonis vaatab paati ülalt alla. Tuul tuleb vasakult, puri on paisunud allatuule poole (paremale), ja purjele tekkinud koondjõud jaguneb kaheks: edasiviivaks jõuks (mis paati liigutab) ja külgjõuks (mis kallutab ja üritab külili lükata, aga mille kiil maha surub).</p>
+
+  <figure>
+    <svg viewBox="0 0 760 470" role="img" aria-label="Pealtvaade: purje jõud jaguneb edasiviivaks jõuks ja külgjõuks">
+      <!-- boat top-down, bow up -->
+      <path d="M360,80 C400,160 400,330 376,382 C372,390 348,390 344,382 C320,330 320,160 360,80 Z" fill="#eaddc2" stroke="var(--ink)" stroke-width="2"/>
+      <line x1="360" y1="74" x2="360" y2="46" stroke="var(--ink)" stroke-width="2"/><polygon points="360,44 354,58 366,58" fill="var(--ink)"/>
+      <text class="Ls" x="360" y="40" text-anchor="middle">vöör — paat liigub ↑</text>
+
+      <!-- wind from upper-left -->
+      <g stroke="var(--sea)" stroke-width="2.6" fill="none">
+        <line x1="120" y1="120" x2="250" y2="205"/>
+        <line x1="150" y1="180" x2="280" y2="265"/>
+      </g>
+      <polygon points="250,205 233,201 240,217" fill="var(--sea)"/>
+      <polygon points="280,265 263,261 270,277" fill="var(--sea)"/>
+      <text class="Lb" x="96" y="108" fill="var(--sea)">näiv tuul</text>
+
+      <!-- mast + sail bowed to leeward (right) -->
+      <circle cx="360" cy="162" r="4" fill="var(--ink)"/>
+      <path d="M360,162 C418,192 442,250 446,298" fill="none" stroke="var(--ink)" stroke-width="3"/>
+      <text class="Lb" x="456" y="300">puri</text>
+
+      <!-- forces from sail midpoint -->
+      <!-- forward (green, up) -->
+      <line x1="412" y1="232" x2="412" y2="118" stroke="var(--green)" stroke-width="3.4"/>
+      <polygon points="412,118 405,136 419,136" fill="var(--green)"/>
+      <text class="Lb" x="372" y="112" fill="var(--green)">EDASI</text>
+      <!-- side (grey, right) -->
+      <line x1="412" y1="232" x2="540" y2="232" stroke="var(--ink-soft)" stroke-width="3.4"/>
+      <polygon points="540,232 522,225 522,239" fill="var(--ink-soft)"/>
+      <text class="L" x="548" y="228" fill="var(--ink-soft)">KÜLG</text>
+      <!-- total (red, resultant up-right) -->
+      <line x1="412" y1="232" x2="540" y2="118" stroke="var(--signal)" stroke-width="4"/>
+      <polygon points="540,118 522,121 531,134" fill="var(--signal)"/>
+      <text class="Lb" x="470" y="100" fill="var(--signal)">purje koondjõud</text>
+
+      <!-- keel resists side force (points left) -->
+      <line x1="360" y1="320" x2="360" y2="420" stroke="var(--brass)" stroke-width="2.4" stroke-dasharray="5 4"/>
+      <line x1="360" y1="400" x2="300" y2="400" stroke="var(--brass)" stroke-width="2.6"/><polygon points="300,400 318,393 318,407" fill="var(--brass)"/>
+      <text class="Ls" x="296" y="392" text-anchor="end" fill="var(--brass-deep)">kiil peab külgjõule vastu</text>
+    </svg>
+    <figcaption>Purje koondjõud (punane) on edasiviiva jõu (roheline) ja külgjõu (hall) summa. Kiil surub külgjõu maha, nii et alles jääb peamiselt edasiliikumine. Sellepärast saabki tuulele teravnurga all vastu sõita.</figcaption>
+  </figure>
+
+  <div class="box myth"><span class="bt">Levinud müüt</span>Sageli õpetatakse (isegi õpikutes), et õhk peab purje või tiiva pikemat, kumeramat külge mööda „samaks ajaks tagasi jõudma" ja liigub seetõttu kiiremini. <strong>See seletus on vale.</strong> Tegelik põhjus on õhuvoolu suunamine ja sellest tekkiv rõhuvahe. Lühike ja autoriteetne selgitus on 3. osas (Cambridge'i video).</div>
+
+  <!-- 4 WIND -->
+  <h3 id="tuul"><span class="n">05</span> Tegelik ja näiv tuul</h3>
+  <p>On kaks „tuult", mida tasub eristada. <strong>Tegelik tuul</strong> on see, mida tunneb paigalseisev vaatleja või kaldal asuv tuulemõõtja. <strong>Näiv tuul</strong> on see, mida tunneb liikuv paat — ja just selle järgi seatakse purjed. Liikuv paat tekitab ise omasuunalise vastutuule, täpselt nii nagu jalgrattaga sõites tunned näkku tuult ka päris tuulevaikse ilmaga.</p>
+  <p>Näiv tuul on kahe asja summa: tegelik tuul pluss paadi liikumisest tekkiv tuul (mis puhub alati vastassuunas paadi liikumisele, ehk poole eest). Et paat liigub edasi, lisandub eestpoolt tuld — seetõttu tundub näiv tuul alati pisut <strong>eest poolt</strong> ja tihti ka <strong>tugevam</strong> kui tegelik tuul. Joonisel liidetakse kaks vektorit rööpküliku abil: tulemus (punane) ongi see, mida puri „tunneb".</p>
+  <figure>
+    <svg viewBox="0 0 760 440" role="img" aria-label="Näiv tuul kui tegeliku tuule ja paadi liikumistuule summa">
+      <!-- reference boat -->
+      <g transform="translate(110,300)">
+        <path d="M0,-30 C11,-8 11,34 5,46 C2,50 -2,50 -5,46 C-11,34 -11,-8 0,-30 Z" fill="#eaddc2" stroke="var(--ink)" stroke-width="1.8"/>
+      </g>
+      <line x1="110" y1="262" x2="110" y2="228" stroke="var(--ink)" stroke-width="2"/><polygon points="110,226 104,240 116,240" fill="var(--ink)"/>
+      <text class="Ls" x="110" y="372" text-anchor="middle">paat liigub ↑</text>
+
+      <!-- parallelogram from O=(300,110) -->
+      <!-- true wind O->A -->
+      <line x1="300" y1="110" x2="480" y2="210" stroke="var(--sea)" stroke-width="4"/>
+      <polygon points="480,210 462,208 470,222" fill="var(--sea)"/>
+      <text class="Lb" x="486" y="206" fill="var(--sea)">tegelik tuul</text>
+      <!-- motion wind O->B (straight down) -->
+      <line x1="300" y1="110" x2="300" y2="290" stroke="var(--brass-deep)" stroke-width="4"/>
+      <polygon points="300,290 294,274 306,274" fill="var(--brass-deep)"/>
+      <text class="Lb" x="150" y="232" fill="var(--brass-deep)">paadi liikumistuul</text>
+      <text class="Ls" x="150" y="250" fill="var(--brass-deep)">(puhub eest)</text>
+      <!-- parallelogram dashed sides -->
+      <line x1="480" y1="210" x2="480" y2="390" stroke="var(--line)" stroke-width="1.4" stroke-dasharray="5 5"/>
+      <line x1="300" y1="290" x2="480" y2="390" stroke="var(--line)" stroke-width="1.4" stroke-dasharray="5 5"/>
+      <!-- apparent O->C -->
+      <line x1="300" y1="110" x2="480" y2="390" stroke="var(--signal)" stroke-width="4.6"/>
+      <polygon points="480,390 466,378 457,390" fill="var(--signal)"/>
+      <text class="Lb" x="498" y="372" fill="var(--signal)">näiv tuul</text>
+      <text class="Ls" x="498" y="390" fill="var(--signal)">— seda tunneb puri</text>
+    </svg>
+    <figcaption>Näiv tuul = tegelik tuul + paadi liikumistuul. Et näiv tuul tuleb pisut eest, peab tihttuulekursil purjed tihedamini sisse tõmbama, kui tegelik tuul justkui eeldaks.</figcaption>
+  </figure>
+  <div class="box tip"><span class="bt">Niidikesed (telltale'id)</span>Purjede külge kinnitatud kerged lõngajupid näitavad õhuvoolu. Kui mõlemal pool purjet voolavad nad sirgelt taha, on puri näiva tuule järgi hästi seatud. See on algajale parim ja kõige kiirem purjeseade-õpetaja.</div>
+
+  <!-- 5 POINTS OF SAIL -->
+  <h3 id="kursid"><span class="n">06</span> Tuulekursid ja purje asend</h3>
+  <p>Paat ei saa sõita otse tuulele vastu: umbes 45° kummalegi poole tuulest jääb <strong>vastutuule sektor</strong>, kus purjed ei suuda jõudu tekitada ja lihtsalt laperdavad (paat on „kinni tuules"). Kõik ülejäänud suunad on sõidetavad ja kannavad nime selle järgi, kui suure nurga all tuule suhtes liigutakse.</p>
+  <figure>
+    <img class="netimg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Points_of_sail.svg" alt="Tuulekursside skeem koos purje asendiga igal kursil">
+    <figcaption>Tuulekursid ja purje asend igal kursil. Joonis: „Points of sail", Wikimedia Commons, CC BY-SA (<a href="https://commons.wikimedia.org/wiki/File:Points_of_sail.svg" target="_blank" rel="noopener">allikas</a>). Ingliskeelsed sildid: <b>No Go Zone</b> = vastutuul, <b>Close Hauled</b> = tihttuul, <b>Beam Reach</b> = pooltuul, <b>Broad Reach</b> = pakstaak, <b>Running</b> = pärituul. (Pilt laeb internetist.)</figcaption>
+  </figure>
+  <p><strong>Kuidas purje asend kursi muutudes muutub.</strong> Mida lähemal tuulele sõidad, seda tihedamalt on purjed sees; mida rohkem tuul tagant, seda rohkem antakse purjed välja:</p>
+  <dl class="terms">
+    <dt>Vastutuul (~0–45°)</dt><dd>ei saa purjetada — purjed laperdavad. Siit sõidetakse läbi ainult pautides.</dd>
+    <dt>Tihttuul (~45°)</dt><dd>purjed <b>tihedalt sisse</b>, peaaegu paadi keskteljega kohakuti. Sinna jõuad ainult loovides.</dd>
+    <dt>Pooltuul / külgtuul (~90°)</dt><dd>tuul küljelt; purjed umbes <b>poolenisti välja</b>. Kiire ja mugav.</dd>
+    <dt>Pakstaak (~135°)</dt><dd>tuul poolviltu tagant; purjed <b>rohkem välja</b>. Sageli kiireim ja rahulikem kurss.</dd>
+    <dt>Pärituul (~180°)</dt><dd>tuul otse tagant; purjed <b>täiesti välja</b>. Foka võib jääda grooti varju (purjed eri poolele — „liblikas"). Ettevaatust ootamatu halsiga (poom!).</dd>
+  </dl>
+  <div class="box tip"><span class="bt">Hals</span><b>Hals</b> ütleb, kummalt poolt tuul puhub: tuul paremalt (tüürpoordist) = parem hals, tuul vasakult (pakpoordist) = vasak hals. Sama mõiste määrab teeandmise (ptk 10).</div>
+  <div class="box learn"><span class="bt">Kus seda õppida</span>Animeeritud ülevaade kursidest ja purjeseadest: Nautilus Sailingu algajaseeria (3. osa). Eesti k. <a href="https://purjetamine.com/eng/purjetamise-manoovrid/" target="_blank" rel="noopener">purjetamine.com „Purjetamise manöövrid"</a>.</div>
+
+  <!-- 6 MANEUVERS -->
+  <h3 id="manoovrid"><span class="n">07</span> Pautimine ja halssimine</h3>
+  <p>Kuna otse tuulele vastu ei saa sõita, jõutakse tuulepoolsesse sihtkohta <strong>siksakk-kursil</strong>: sõidetakse tihttuulekursil kord ühe, kord teise halsiga, lähenedes sihtmärgile teravnurga all. Seda nimetatakse <strong>loovimiseks</strong> (ka krüssamiseks). Halsi vahetamiseks on kaks manöövrit, ja nende erinevus on lihtne: kummast otsast paat tuule läbib.</p>
+  <dl class="terms">
+    <dt>Pautimine</dt><dd><b>vöör</b> läbib tuule — paat pöörab ninaga läbi vastutuule sektori ühelt halsilt teisele. Suurem pööre (~90°). Paat aeglustub pöörde ajal, seega alusta hea kiiruse pealt, muidu jääb paat „tuulde kinni".</dd>
+    <dt>Halssimine</dt><dd><b>ahter</b> läbib tuule — taganttuule kursil pöörab paat nii, et tuul liigub üle ahtri. Väiksem pööre, kuid <b>poom paiskub jõuliselt ühelt poolt teisele</b>, seega tuleb pead hoida madalal ja meeskonda hoiatada.</dd>
+  </dl>
+  <figure>
+    <svg viewBox="0 0 760 380" role="img" aria-label="Pautimine ja halssimine: paadi rada ja pöördekoht">
+      <defs>
+        <g id="mboat">
+          <path d="M0,-15 C6,-3 6,19 3,26 C1.5,29 -1.5,29 -3,26 C-6,19 -6,-3 0,-15 Z" fill="#eaddc2" stroke="var(--ink)" stroke-width="1.6"/>
+          <line x1="0" y1="-8" x2="0" y2="18" stroke="var(--ink)" stroke-width="1.2"/>
+        </g>
+      </defs>
+      <line x1="380" y1="24" x2="380" y2="356" stroke="var(--line)" stroke-width="1" stroke-dasharray="4 5"/>
+
+      <!-- LEFT: PAUTIMINE -->
+      <text class="Lb" x="200" y="32" text-anchor="middle">PAUTIMINE — vöör läbib tuule</text>
+      <line x1="200" y1="44" x2="200" y2="84" stroke="var(--sea)" stroke-width="3"/><polygon points="200,88 193,72 207,72" fill="var(--sea)"/>
+      <text class="Ls" x="224" y="68" fill="var(--sea)">tuul</text>
+      <!-- no-go faint -->
+      <path d="M150,210 L93,98 A124,124 0 0,1 207,98 Z" fill="var(--signal)" opacity=".07"/>
+      <!-- path: start lower-right, up-left to tack, up-right -->
+      <polyline points="270,330 150,210 268,98" fill="none" stroke="var(--brass-deep)" stroke-width="3"/>
+      <use href="#mboat" transform="translate(232,290) rotate(-27)"/>
+      <use href="#mboat" transform="translate(150,210) rotate(0)"/>
+      <use href="#mboat" transform="translate(230,135) rotate(27)"/>
+      <text class="Ls" x="138" y="214" text-anchor="end" fill="var(--signal)">pööre läbi</text>
+      <text class="Ls" x="138" y="230" text-anchor="end" fill="var(--signal)">tuule</text>
+      <text class="Ls" x="285" y="332" fill="var(--ink-soft)">algus</text>
+
+      <!-- RIGHT: HALSSIMINE -->
+      <text class="Lb" x="560" y="32" text-anchor="middle">HALSSIMINE — ahter läbib tuule</text>
+      <line x1="560" y1="44" x2="560" y2="84" stroke="var(--sea)" stroke-width="3"/><polygon points="560,88 553,72 567,72" fill="var(--sea)"/>
+      <text class="Ls" x="584" y="68" fill="var(--sea)">tuul</text>
+      <!-- path: start upper, down to gybe (lower), continue down -->
+      <polyline points="500,110 620,210 500,322" fill="none" stroke="var(--brass-deep)" stroke-width="3"/>
+      <use href="#mboat" transform="translate(556,150) rotate(132)"/>
+      <use href="#mboat" transform="translate(620,210) rotate(180)"/>
+      <use href="#mboat" transform="translate(556,272) rotate(228)"/>
+      <text class="Ls" x="632" y="206" fill="var(--signal)">poom</text>
+      <text class="Ls" x="632" y="222" fill="var(--signal)">paiskub üle</text>
+      <text class="Ls" x="486" y="112" text-anchor="end" fill="var(--ink-soft)">algus</text>
+    </svg>
+    <figcaption>Pautides liigub paat tuulepoole (rada „nina ees", paat läbib tuule vööriga ja aeglustub hetkeks). Halssides liigub paat tuulest eemale ja läbib tuule ahtriga — poom lendab üle teki.</figcaption>
+  </figure>
+  <div class="box warn"><span class="bt">Ohutus — poom</span>Poom liigub halssimisel (ja kogemata halsi minnes) ootamatult ja jõuga ühelt poolt teisele. See on purjeka kõige sagedasem vigastuse põhjus. Käsklus meeskonnale enne iga pööret: <b>„pead alla!"</b> — ja jälgi poomi.</div>
+
+  <!-- 7 TRIM -->
+  <h3 id="trimm"><span class="n">08</span> Purjede seadistamine</h3>
+  <p>Purje seadmine tähendab selle nurga muutmist tuule suhtes, andes sooti sisse (tõmmates) või välja (lastes). Põhimõte algajale on lihtne ja töötab igal kursil:</p>
+  <ul class="clean">
+    <li><b>Esmalt kurss, siis purjed.</b> Otsusta, kuhu tahad sõita, ja sea purjed selle kursi järgi — mitte vastupidi.</li>
+    <li><b>Laperduse reegel.</b> Anna soot lahti, kuni purje <b>esiliik</b> (esiserv, masti/staagi pool — luff) hakkab laperdama, siis tõmba tasapisi tagasi, kuni laperdus just kaob. <b>Miks just esiliik?</b> Tuul kohtab purje esiserva esimesena, seega liiga lõdva purje korral hakkab esiliik (mitte tagaliik) esimesena „uduma". Seetõttu jälgid alati esiserva, mitte tagaserva.</li>
+    <li><b>Niidikesed.</b> Mõlemal pool purjet sirgelt taha voolavad lõngad = puri töötab hästi.</li>
+    <li><b>Luhvamine ja vallamine.</b> Luhvamine on vööri tuulde pööramine; vallamine on vööri tuulest eemale pööramine. Need on kursimuutuse põhisõnad.</li>
+    <li><b>Kreen ja rehvimine.</b> Kui tuul tugevneb ja paat kreenib liiga (üle ~20°), ei anna see kiirust juurde, ainult ebamugavust. Võta tuult vähem (anna soot lahti või luhva) ja vajadusel <b>rehvi</b> — vähenda purjepinda.</li>
+  </ul>
+
+  <!-- 8 DOCKING -->
+  <h3 id="sildumine"><span class="n">09</span> Sildumine ja ankrusse jäämine</h3>
+  <p>Sadamasse tulek on algajale meeskonnale tavaliselt kõige pingelisem hetk, sest purjekal pole pidureid peale tagurpidikäigu. Seetõttu tehakse seda <strong>aeglaselt ja plaaniga</strong>. Põhimõte, mille ümber kõik keerleb: <strong>lähene alati vastu tuult või voolu</strong> (kumb on tugevam) — siis aitab loodus paati pidurdada, mitte ei kanna seda kontrollimatult kai poole. Juhtmõte: „nii aeglaselt kui võimalik, nii kiiresti kui vajalik, et rool veel juhiks."</p>
+  <h4>Mis toimub ja kes mida teeb</h4>
+  <p>Enne sadamasse pööramist räägitakse plaan valjult läbi ja jagatakse rollid:</p>
+  <dl class="terms">
+    <dt>Roolija / skipper</dt><dd>juhib lähenemist ja mootorit, valib nurga ja kiiruse, annab rahulikud käsklused.</dd>
+    <dt>Vööriotsa-mees</dt><dd>valmistab vööriotsa, annab kaile või võtab kinni; ei hüppa, vaid astub üle alles kui paat on lähedal ja peaaegu seisab.</dd>
+    <dt>Ahtriotsa- / spring-mees</dt><dd>hoolitseb ahtri- ja spring-otsa eest; spring kinnitatakse sageli esimesena, sest see peatab pikiliikumise.</dd>
+    <dt>Vendrimees</dt><dd>riputab vendrid õigele kõrgusele ja kohta juba enne lähenemist; hoiab pootshaaki valmis.</dd>
+  </dl>
+  <h4>Vendrid — milleks, kuhu ja kui kõrgele</h4>
+  <p>Vendrid on pehmed kaitsepadjad, mis hoiavad parrast kai või naaberpaadi vastu muljumast — ilma nendeta saab parras kärbitud juba kerge põrkega.</p>
+  <ul class="clean">
+    <li><b>Kuhu:</b> vähemalt <b>kolm</b> kaipoolsel pardal (vöör, kesk paadi laiima koha juures, ahter); üks varuvender teisel pardal.</li>
+    <li><b>Kui kõrgele:</b> reguleeri kõrgus <b>kai järgi</b> — ujuvkai juures madalamale, kõrge kivikai juures kõrgemale, et vender jääks just kokkupuutekõrgusele.</li>
+    <li><b>Kuidas kinnitada:</b> reelingu külge <b>veeblinguga (seasõrg)</b> + lukustav poolsõlm.</li>
+  </ul>
+  <h4>Otsad ja kinnitamise järjekord</h4>
+  <p>Kolm peamist otsa: <b>vööriots</b>, <b>ahtriots</b> ja <b>spring</b> (paadi keskelt kaldu, takistab edasi-tagasi nihkumist). Kinnita <b>kõigepealt see ots, mis peatab liikumise</b> (allatuule/allavoolu pool või spring), siis ülejäänud.</p>
+  <figure>
+    <svg viewBox="0 0 760 330" role="img" aria-label="Skeem: jahi sidumine kai külge — vööriots, ahtriots ja kaks springi">
+      <rect x="0" y="0" width="760" height="38" fill="#d8c7a6"/>
+      <line x1="0" y1="38" x2="760" y2="38" stroke="var(--ink)" stroke-width="2.2"/>
+      <text class="Lb" x="20" y="26">KAI</text>
+      <circle cx="110" cy="38" r="6" fill="var(--ink)"/><circle cx="300" cy="38" r="6" fill="var(--ink)"/><circle cx="470" cy="38" r="6" fill="var(--ink)"/><circle cx="660" cy="38" r="6" fill="var(--ink)"/>
+      <text class="Ls" x="640" y="30">knaap</text>
+      <path d="M170,160 C230,126 420,126 560,132 L560,188 C420,194 230,194 170,160 Z" fill="#eaddc2" stroke="var(--ink)" stroke-width="2"/>
+      <text class="Ls" x="300" y="166" fill="var(--ink-soft)">jaht (pealtvaade)</text>
+      <text class="Ls" x="150" y="162" text-anchor="end" fill="var(--ink-soft)">vöör</text>
+      <text class="Ls" x="572" y="162" fill="var(--ink-soft)">ahter</text>
+      <circle cx="320" cy="116" r="5" class="dot"/><circle cx="400" cy="114" r="5" class="dot"/><circle cx="480" cy="116" r="5" class="dot"/>
+      <text class="Ls" x="498" y="108" fill="var(--signal)">vendrid</text>
+      <line x1="205" y1="148" x2="110" y2="40" stroke="var(--ink-soft)" stroke-width="2.2"/>
+      <text class="Lb" x="120" y="86">vööriots</text>
+      <line x1="545" y1="148" x2="660" y2="40" stroke="var(--ink-soft)" stroke-width="2.2"/>
+      <text class="Lb" x="600" y="86">ahtriots</text>
+      <line x1="250" y1="140" x2="470" y2="40" stroke="var(--brass-deep)" stroke-width="2.2"/>
+      <line x1="500" y1="140" x2="300" y2="40" stroke="var(--brass-deep)" stroke-width="2.2"/>
+      <text class="Ls" x="230" y="232" fill="var(--brass-deep)">vöörspring</text><line class="lead-line" x1="258" y1="222" x2="300" y2="150"/>
+      <text class="Ls" x="470" y="232" text-anchor="end" fill="var(--brass-deep)">ahterspring</text><line class="lead-line" x1="452" y1="222" x2="455" y2="150"/>
+      <text class="Ls" x="380" y="268" text-anchor="middle" fill="var(--ink-soft)">springid ristuvad keskel ja takistavad paadi edasi-tagasi nihkumist piki kaid</text>
+    </svg>
+    <figcaption><b>Vööriots</b> hoiab vööri, <b>ahtriots</b> ahtri. <b>Vöörspring</b> (vöörist tahapoole) takistab paadil <b>ettepoole</b> nihkumast; <b>ahterspring</b> (ahtrist ettepoole) takistab <b>tahapoole</b> nihkumast. Vendrid paadi ja kai vahel; otsad kinnitatakse kaiknaapidesse knaabikinnitusega.</figcaption>
+  </figure>
+  <h4>Erinevad tuulesuunad ja kuidas käituda</h4>
+  <table class="rules">
+    <tr><th>Tuule suund</th><th>Mida teha</th></tr>
+    <tr><td><b>Tuul piki kaid</b></td><td>Lähene <b>vastu tuult</b> (nina tuulde) — tuul pidurdab loomulikult.</td></tr>
+    <tr><td><b>Tuul kai poole</b> (surub vastu kaid)</td><td>Lähene <b>laugema nurga all</b> (~10–20°) ja väikese kiirusega; tuul toob paadi ise õrnalt kai äärde. Vendrid kindlasti valmis.</td></tr>
+    <tr><td><b>Tuul kaist eemale</b> (lükkab ära)</td><td>Lähene <b>järsema nurga all</b> (~30–45°), säilita veidi kiirust kuni ots kinni; saada esimene ots (vööri/spring) kohe kaile.</td></tr>
+    <tr><td><b>Vool tugevam kui tuul</b></td><td>Lähene <b>vastu voolu</b>.</td></tr>
+  </table>
+  <div class="box warn"><span class="bt">Ohud — mida jälgida</span>
+    <ul class="clean" style="margin-top:4px">
+      <li><b>Ära kunagi pane kätt ega jalga paadi ja kai (või teise paadi) vahele.</b> Peata paat mootori, vendrite ja pootshaagiga.</li>
+      <li><b>Ära hüppa kaile</b> — astu üle alles, kui paat on lähedal ja peaaegu seisab.</li>
+      <li><b>Hoia otsad veest väljas</b> — vajunud ots võib keerduda sõukruvi külge.</li>
+      <li>Meeskond haarab <b>otstest ja kaist</b>, mitte sõrmedega parraste vahelt — muljumisoht.</li>
+    </ul>
+  </div>
+  <h4>Ankrusse jäämine</h4>
+  <p>Vali tuulevarjuline, sobiva sügavusega koht. Lase ankrut välja umbes <b>3–5× sügavuse jagu</b> ketti/otsa, tagurda õrnalt haakumiseks. Veendu, et ankur peab — vaata kahte maamärki kohakuti: kui need püsivad, paat ei triivi.</p>
+  <div class="box learn"><span class="bt">Kus seda õppida</span>Animeeritud/illustreeritud (autoriõiguse tõttu lingin, ei kopeeri pilte): <a href="https://americansailing.com/learn-to-sail/videos/docking-made-easy/" target="_blank" rel="noopener">American Sailing „Docking Made Easy"</a> ja <a href="https://www.safe-skipper.com/competent-crew-skills-arriving-and-leaving-a-berth/" target="_blank" rel="noopener">Safe Skipper „Arriving and leaving a berth"</a>.</div>
+
+  <!-- 9 SAFETY -->
+  <h3 id="ohutus"><span class="n">10</span> Ohutus ja teeandmine (COLREG)</h3>
+  <h4>Ohutuse alustõed</h4>
+  <ul class="clean">
+    <li><b>Päästevest selga</b> — lastele alati, täiskasvanutele kehvades oludes, pimedas ja üksinda tekil olles.</li>
+    <li><b>„Üks käsi laevale"</b> — liigu alati millestki kinni hoides; kehvas ilmas kinnita end turvarakmete ja turvaliiniga.</li>
+    <li><b>Mees üle parda (MÜP):</b> hüüa „mees vees!", osuta inimesele ja ära kaota teda silmist, viska kohe ujuvvahend vette. Harjuta tagasipöördumist rahulikult (nt poiga) juba esimestel kordadel.</li>
+    <li><b>Ilm enne väljasõitu:</b> vaata tuule kiirust, suunda, puhanguid ja muutuse prognoosi. Algaja meeskonnaga sõida kerge tuulega.</li>
+    <li><b>Rehvimine õigel ajal:</b> vähenda purjepinda <em>enne</em>, kui tuul liiga tugevaks läheb.</li>
+    <li><b>VHF-raadio</b> hädaolukorraks; teata maale jäänule oma sõiduplaan ja eeldatav tagasitulek.</li>
+  </ul>
+  <h4>Teeandmine — COLREG põhimõtted</h4>
+  <p>Merel kehtivad rahvusvahelised kokkupõrke vältimise reeglid (COLREG). Põhiloogika: kahest kohtuvast paadist on üks <strong>teeandja</strong> (peab kurssi/kiirust muutma) ja teine <strong>kursipidaja</strong> (hoiab kurssi, et olla etteaimatav). Tähtis erand: <strong>mootoriga sõitev purjekas loetakse mootorlaevaks</strong>, isegi kui purjed on üleval.</p>
+  <p>Kui kohtuvad <strong>kaks purjekat</strong>, otsustab halss (kummalt poolt tuul puhub):</p>
+  <table class="rules">
+    <tr><th>Olukord</th><th>Kes annab teed</th></tr>
+    <tr><td>Paadid <b>eri halsil</b></td><td><b>Vasakul halsil</b> olev (tuul vasakult/pakpoordist) annab teed paremal halsil olevale.</td></tr>
+    <tr><td>Paadid <b>samal halsil</b></td><td><b>Tuulepoolne</b> annab teed allatuulepoolsele.</td></tr>
+    <tr><td><b>Kahtlus</b>, kummal halsil teine on</td><td>Eelda halvimat ja <b>anna ise teed</b>.</td></tr>
+    <tr><td><b>Möödasõit</b></td><td><b>Möödasõitja</b> annab alati teed — ka purjekas, kui möödub mootorpaadist.</td></tr>
+  </table>
+  <ul class="clean">
+    <li><b>Mootor annab purjele teed</b> — üldreegel avaveel.</li>
+    <li><b>Suurtele ja piiratud manööverdusvõimega laevadele anna ise teed</b> (laevad, parvlaevad, pukseerijad, kalalaevad, kitsas farvaatris) — nemad ei põiku väikese purjeka pärast.</li>
+    <li><b>Kursipidaja ei ole kohustusteta:</b> kui teeandja ei tegutse, väldi ka ise kokkupõrget — pööra pigem <b>tüürpoordi (paremale)</b>.</li>
+    <li><b>Hoia pidev vaatlus</b>; kahtluse korral vähenda kiirust.</li>
+  </ul>
+  <div class="box learn"><span class="bt">Kus seda õppida (joonistega)</span>Illustratsioonid ja animatsioonid (lingin, sest pildid on autoriõigusega): <a href="https://maritime.college/Sailing-Rules.php" target="_blank" rel="noopener">National Maritime College „Sailing Rules"</a>, <a href="https://www.safe-skipper.com/the-give-way-hierarchy-sail-boats-and-power-boats/" target="_blank" rel="noopener">Safe Skipper „Give-way hierarchy"</a> ja <a href="https://sailing-blog.nauticed.org/who-gives-way-port-versus-starboard/" target="_blank" rel="noopener">NauticEd Rule 12 animatsioon</a>.</div>
+
+  <hr class="rope">
+
+  <!-- PART 2 -->
+  <div class="part-label">Teine osa &middot; Koolituskava</div>
+  <h2 class="sec" id="kava">Koolituskava</h2>
+  <p class="lead">Etapid lähevad maalt vette ja lihtsast keeruliseni. Iga etapi juures on kirjas, <b>kust seda teooriat õppida</b> (1. osa ja valitud videod) ning <b>mis on praktikas „valmis" kriteerium</b>. Eesti hooaeg on mai–september: realistlik on jõuda esimese suvega etapini 3–4 ja teisega ülejäänuni. Lõppsiht: pere purjetab koos ja te kahekesi saate VENUSEGA mugavalt hakkama.</p>
+
+  <details class="stage">
+    <summary><span class="badge">0</span><span><span class="st-title">Etapp 0 — Teooria kuival</span><br><span class="st-sub">Enne hooaega · õhtud kodus</span></span><span class="chev"></span></summary>
+    <div class="body"><div class="cols">
+      <div><h4>Praktika (kuival)</h4><ul class="clean"><li>Kuus sõlme selgeks (paalisõlm ja veebling vaatamata).</li><li>„Tuule mäng": kus on tuul, mis kurss kuhu sõiduks.</li><li>Käsklused läbi mängitud („pead alla", „valmis pöördeks").</li></ul></div>
+      <div><h4>Õpi enne (teooria)</h4><ul class="clean"><li>1. osa: <a href="#osad">osad</a>, <a href="#purjed">purjed</a>, <a href="#otsad">otsad ja sõlmed</a>, <a href="#kursid">kursid</a>.</li><li>Sõlmed: Animated Knots (3. osa).</li></ul></div>
+    </div>
+    <div class="learnrow"><b>Õpieesmärk:</b> oska nimetada purjeka osi, näidata tuulekursse ja siduda paalisõlme silmside.</div>
+    <div class="ready"><b>Valmis kui:</b> kõik seovad paalisõlme ilma juhendita ja oskavad joonise pealt kursse näidata.</div></div>
+  </details>
+
+  <details class="stage">
+    <summary><span class="badge">1</span><span><span class="st-title">Etapp 1 — Paadiga tutvumine sadamas</span><br><span class="st-sub">Paat kinni sadamas, ei purjeta veel</span></span><span class="chev"></span></summary>
+    <div class="body"><div class="cols">
+      <div><h4>Praktika</h4><ul class="clean"><li>Joonise osad päris paadi pealt üles otsida.</li><li>Leia fallid, soodid, vintsid, knaabid, vendrid.</li><li>Ohutusvarustus: vestid igaühele sobitada, turvaliinid, päästerõngas, tulekustuti, VHF.</li><li>Mootori käivitamise rutiin; pardalemineku reeglid.</li></ul></div>
+      <div><h4>Õpi enne (teooria)</h4><ul class="clean"><li>1. osa: <a href="#osad">osad</a>, <a href="#ohutus">ohutus</a>.</li><li>Video: Nautilus „Sailing Basics" — sissejuhatus ja paadi osad (3. osa).</li></ul></div>
+    </div>
+    <div class="learnrow"><b>Õpieesmärk:</b> saada paadil enesekindlalt ringi liikuma ja teada, kus mis asub.</div>
+    <div class="ready"><b>Valmis kui:</b> igaüks paneb vesti ise selga ja liigub laeval ohutult, millestki kinni hoides.</div></div>
+  </details>
+
+  <details class="stage">
+    <summary><span class="badge">2</span><span><span class="st-title">Etapp 2 — Mootoriga manööverdamine</span><br><span class="st-sub">Vaikne ilm, purjed all</span></span><span class="chev"></span></summary>
+    <div class="body"><div class="cols">
+      <div><h4>Praktika</h4><ul class="clean"><li>Sadamast väljumine ja tagasitulek mootoriga.</li><li>Aeglane juhitavus, tagurpidikäik, kohapeal pööramine.</li><li>Otste andmine/võtmine, vendrid, spring.</li><li>MÜP-harjutus mootoriga (poi „päästmine").</li></ul></div>
+      <div><h4>Õpi enne (teooria)</h4><ul class="clean"><li>1. osa: <a href="#sildumine">sildumine</a>.</li><li>Video: Nautilus „Sailing Basics" — sadamast lahkumine ja sildumine (3. osa).</li></ul></div>
+    </div>
+    <div class="learnrow"><b>Õpieesmärk:</b> juhtida paati aeglasel kiirusel kindlalt ja plaanipäraselt.</div>
+    <div class="ready"><b>Valmis kui:</b> tulete rahulikult sadamasse ja lahkute, rollid selged, ning toote poi mootoriga 2 katsega kätte.</div></div>
+  </details>
+
+  <details class="stage">
+    <summary><span class="badge">3</span><span><span class="st-title">Etapp 3 — Esimene purjetamine</span><br><span class="st-sub">Kerge tuul, avar vesi</span></span><span class="chev"></span></summary>
+    <div class="body"><div class="cols">
+      <div><h4>Praktika</h4><ul class="clean"><li>Grootpurje ja foka heiskamine (vööriga vastutuult).</li><li>Roolimine sihtpunkti järgi, paadi tunnetamine.</li><li>Kõik kursid: pooltuul → pakstaak → tihttuul.</li><li>Igaüks roolib ja sootib kordamööda.</li></ul></div>
+      <div><h4>Õpi enne (teooria)</h4><ul class="clean"><li>1. osa: <a href="#puri">kuidas puri töötab</a>, <a href="#kursid">kursid</a>, <a href="#trimm">purjeseade</a>.</li><li>Video: Nautilus „Sailing Basics" — points of sail + sail trim (3. osa).</li></ul></div>
+    </div>
+    <div class="learnrow"><b>Õpieesmärk:</b> mõista, miks paat liigub, ja osata purje laperduse järgi seada.</div>
+    <div class="ready"><b>Valmis kui:</b> igaüks on roolinud sirget kurssi, seab purje laperduse järgi ja kreen ei tee enam ärevaks.</div></div>
+  </details>
+
+  <details class="stage">
+    <summary><span class="badge">4</span><span><span class="st-title">Etapp 4 — Manöövrid ja trimm</span><br><span class="st-sub">Kindlam meeskond</span></span><span class="chev"></span></summary>
+    <div class="body"><div class="cols">
+      <div><h4>Praktika</h4><ul class="clean"><li>Pautimine kuni sujub (foka soodi vahetus).</li><li>Kontrollitud halssimine — „pead alla" rutiin.</li><li>Loovimine kindla punkti poole.</li><li>Esimene rehv harjutuse korras kerges tuules.</li></ul></div>
+      <div><h4>Õpi enne (teooria)</h4><ul class="clean"><li>1. osa: <a href="#manoovrid">pautimine ja halssimine</a>, <a href="#trimm">rehvimine</a>.</li><li>Video: Nautilus „Tacking &amp; Gybing" (3. osa).</li></ul></div>
+    </div>
+    <div class="learnrow"><b>Õpieesmärk:</b> vahetada halssi turvaliselt ja jõuda tuulele vastu loovides.</div>
+    <div class="ready"><b>Valmis kui:</b> meeskond pautib ja halssib ilma pideva sekkumiseta ning oskab tuulele vastu loovida.</div></div>
+  </details>
+
+  <details class="stage">
+    <summary><span class="badge">5</span><span><span class="st-title">Etapp 5 — Meresõidu oskused</span><br><span class="st-sub">Vahelduvad olud</span></span><span class="chev"></span></summary>
+    <div class="body"><div class="cols">
+      <div><h4>Praktika</h4><ul class="clean"><li>MÜP-manööver purjede all, korduvalt.</li><li>Rehvimine tuulisemas ilmas.</li><li>Ankrusse jäämine ja öömaja lahel.</li><li>Lühike päevasõit teise sadamasse.</li></ul></div>
+      <div><h4>Õpi enne (teooria)</h4><ul class="clean"><li>1. osa: <a href="#ohutus">ohutus (MÜP)</a>, <a href="#sildumine">ankrusse jäämine</a>.</li><li>Video: Nautilus „Sailing Basics" — man overboard + reefing (3. osa).</li></ul></div>
+    </div>
+    <div class="learnrow"><b>Õpieesmärk:</b> tulla toime, kui olud muutuvad, ja teha iseseisev päevareis.</div>
+    <div class="ready"><b>Valmis kui:</b> toote MÜP purjede all kätte, rehvite kindlalt ja olete teinud reisi punktist A punkti B.</div></div>
+  </details>
+
+  <details class="stage">
+    <summary><span class="badge">6</span><span><span class="st-title">Etapp 6 — Pere purjetab · te kahekesi</span><br><span class="st-sub">Eesmärk saavutatud</span></span><span class="chev"></span></summary>
+    <div class="body"><div class="cols">
+      <div><h4>Pere</h4><ul class="clean"><li>Püsivad, igaühele sobivad rollid.</li><li>Lapsed roolivad ja sootivad iseseisvalt.</li><li>Rahulikud nädalavahetuse-reisid lähisaartele.</li></ul></div>
+      <div><h4>Kahekesi</h4><ul class="clean"><li>Kaaslane roolib üksi, kui sina purjedega tegeled.</li><li>Kahekesi sildumine ja ankrusse jäämine harjutatud.</li><li>Lihtne MÜP-plaan kahekesi.</li></ul></div>
+    </div>
+    <div class="learnrow"><b>Õpieesmärk:</b> jagatud, harjumuspärane meeskonnatöö ilma juhendita.</div>
+    <div class="ready"><b>Valmis kui:</b> saate kahekesi VENUSEGA rahulikult merele ja tagasi ning naudite seda.</div></div>
+  </details>
+
+  <div class="box tip"><span class="bt">Mõte juurde</span>Kaalu paaril korral praktilist kursust sertifitseeritud instruktoriga (nt RYA-stiilis algkursus). See kiirendab eriti kaaslase ja laste enesekindluse kasvu ning annab objektiivse tagasiside — edasine iseseisev areng on siis palju sujuvam.</div>
+
+  <hr class="rope">
+
+  <!-- PART 3 -->
+  <div class="part-label">Kolmas osa &middot; Materjalid</div>
+  <h2 class="sec" id="materjalid">Materjalid ja videod</h2>
+  <div class="note">
+    <strong>Vähem ja õiget, mitte palju ja laialivalguvat.</strong> Allpool on väike, sihilik valik: õpetavad allikad, mitte „purjetamisest rääkivad" videod. Kõike ei pea ära vaatama — alusta tärniga (★) tähistatust ja võta etappide kaupa. Videoid ma ise vaadata ei saa, seega valisin need kanali maine, struktuuri ja teema järgi; tasub need enne perele näitamist korraks ise üle vaadata.
+  </div>
+
+  <h3>Õppevideod</h3>
+  <div class="res star">
+    <p class="rh">★ Nautilus Sailing — „Learn How To Sail: Sailing Basics" (12-osaline seeria)</p>
+    <p class="meta"><span class="flag en">INGLISE</span> kanal: Nautilus Sailing · ühekerelisele jahile · struktureeritud kursus</p>
+    <p>See ongi teie põhiline „videokursus" — ülesehitatud algajale, ühekerelise jahi näitel, professionaalsete instruktoritega. Pole laialivalguv: iga osa õpetab ühe konkreetse oskuse. Vaata etappide kaupa, mitte korraga. Vajadusel lülita sisse automaattõlkega subtiitrid.</p>
+    <p>Seeria järjekorras kõige olulisemad osad teie jaoks:</p>
+    <ul>
+      <li>Sissejuhatus ja paadi osad → etapp 1</li>
+      <li>Sadamast lahkumine ja sildumine → etapp 2</li>
+      <li>Points of sail (tuulekursid) ja sail trim (purjeseade) → etapp 3</li>
+      <li>Tacking &amp; Gybing (pautimine ja halssimine) → etapp 4</li>
+      <li>Man overboard ja reefing → etapp 5</li>
+    </ul>
+    <p>Terve seeria: <a href="https://www.youtube.com/playlist?list=PL0joRZMH7HDTHJlZGAzlUGgboKEmHylMI" target="_blank" rel="noopener">youtube.com/playlist (Sailing Basics)</a><br>
+    Üksiknäide (Tacking &amp; Gybing): <a href="https://www.youtube.com/watch?v=SWIX6SUh-nc" target="_blank" rel="noopener">youtube.com/watch?v=SWIX6SUh-nc</a></p>
+  </div>
+  <div class="res">
+    <p class="rh">Animated Knots by Grog + American Sailing „Knots Made Easy"</p>
+    <p class="meta"><span class="flag en">INGLISE</span> · puhtalt pildi järgi õpitav · sõlmed</p>
+    <p>Konkreetne ülesanne: õpi kuus sõlme — paalisõlm, kaheksasõlm, täiskeerd ja kaks lihtsõlme, rehvisõlm, <b>veebling (seasõrg, vendrite jaoks)</b> ja knaabikinnitus. Animatsioon näitab iga liigutust. Eesti nimed: <a href="https://mereviki.vta.ee/mediawiki/index.php/S%C3%B5lmed" target="_blank" rel="noopener">Mereviki „Sõlmed"</a>.</p>
+    <p><a href="https://www.animatedknots.com/boating-knots" target="_blank" rel="noopener">animatedknots.com/boating-knots</a> · <a href="https://americansailing.com/learn-to-sail/videos/knots-made-easy/" target="_blank" rel="noopener">americansailing.com/.../knots-made-easy</a></p>
+  </div>
+  <div class="res">
+    <p class="rh">Cambridge'i ülikool — „How wings really work" (prof. Holger Babinsky)</p>
+    <p class="meta"><span class="flag en">INGLISE</span> · ~1 min · uudishimulikule / vanemale lugejale</p>
+    <p>Lühike, autoriteetne tuuletunneli-katse: näitab, miks levinud „tiivaseletus" on vale ja kuidas tõstejõud tegelikult tekib. Sama füüsika kehtib purje kohta (1. osa, ptk 3).</p>
+    <p><a href="https://www.cam.ac.uk/research/news/how-wings-really-work" target="_blank" rel="noopener">cam.ac.uk/research/news/how-wings-really-work</a></p>
+  </div>
+
+  <h3>Oskused ja reeglid (joonistega juhendid)</h3>
+  <div class="res">
+    <p class="rh">Sildumine — American Sailing „Docking Made Easy" ja Safe Skipper</p>
+    <p class="meta"><span class="flag en">INGLISE</span> · animatsioonid + skeemid · sildumine</p>
+    <p>Eri tuulesuundadega lähenemine, otste ja vendrite paigutus — illustreeritult ja animeeritult.</p>
+    <p><a href="https://americansailing.com/learn-to-sail/videos/docking-made-easy/" target="_blank" rel="noopener">Docking Made Easy</a> · <a href="https://www.safe-skipper.com/competent-crew-skills-arriving-and-leaving-a-berth/" target="_blank" rel="noopener">Safe Skipper — arriving &amp; leaving a berth</a></p>
+  </div>
+  <div class="res">
+    <p class="rh">Teeandmine (COLREG) — illustreeritud reeglid</p>
+    <p class="meta"><span class="flag en">INGLISE</span> · joonised + animatsioon</p>
+    <p>Kes annab teed: starboard/port hals, tuulepoolne/allatuulepoolne, mootor vs puri.</p>
+    <p><a href="https://maritime.college/Sailing-Rules.php" target="_blank" rel="noopener">National Maritime College — Sailing Rules</a> · <a href="https://www.safe-skipper.com/the-give-way-hierarchy-sail-boats-and-power-boats/" target="_blank" rel="noopener">Safe Skipper — give-way hierarchy</a> · <a href="https://sailing-blog.nauticed.org/who-gives-way-port-versus-starboard/" target="_blank" rel="noopener">NauticEd — Rule 12 animatsioon</a></p>
+  </div>
+  <div class="res">
+    <p class="rh">Purjed ja nende osad — illustreeritud</p>
+    <p class="meta"><span class="flag en">INGLISE</span> · joonised</p>
+    <p>Esiliik/tagaliik/alaliik, vallinurk/halsinurk/soodinurk ja purjeliigid selgete piltidega.</p>
+    <p><a href="https://americansailing.com/articles/understanding-sailboats-the-sails/" target="_blank" rel="noopener">American Sailing — The Sails</a> · <a href="https://improvesailing.com/sailboat/parts-of-a-sail-explained" target="_blank" rel="noopener">Improve Sailing — Parts of a Sail</a></p>
+  </div>
+
+  <h3>Eestikeelne lugemine</h3>
+  <div class="res">
+    <p class="rh">Purjetamine.com — „Millest koosneb purjekas?" ja „Purjetamise manöövrid"</p>
+    <p class="meta"><span class="flag et">EESTI</span> osad · manöövrid · selgitav</p>
+    <p>Esimene seletab osade nimed ja joonised (vöörstaak, ahterstaak, leitvagen, halsi-/soodi-/vallinurk), teine pautimise, halssimise, luhvamise ja vallamise. Just neile tugineb selle käsiraamatu terminoloogia.</p>
+    <p><a href="https://purjetamine.com/eng/millest-koosneb-purjekas/" target="_blank" rel="noopener">millest-koosneb-purjekas</a> · <a href="https://purjetamine.com/eng/purjetamise-manoovrid/" target="_blank" rel="noopener">purjetamise-manoovrid</a></p>
+  </div>
+  <div class="res">
+    <p class="rh">Alar Volmer — „Hakkame purjetama!"</p>
+    <p class="meta"><span class="flag et">EESTI</span> algajale · selgitav</p>
+    <p>Sõbralik, jutustav sissejuhatus eesti keeles: riietus, terminoloogia, osad, kursid ja manöövrid. Hea esimene lugemine kogu perele.</p>
+    <p><a href="https://alarvolmersailing.ee/hakkame-purjetama" target="_blank" rel="noopener">alarvolmersailing.ee/hakkame-purjetama</a></p>
+  </div>
+  <div class="res">
+    <p class="rh">Mereviki (Transpordiamet) ja Opiq</p>
+    <p class="meta"><span class="flag et">EESTI</span> ametlik teatmik · sõlmed</p>
+    <p>Kindlad eestikeelsed vasted (nt „Kurss tuule suhtes", „Sõlmed"). Kasuta sõnaraamatuna, kui mõni termin jääb segaseks.</p>
+    <p><a href="https://mereviki.vta.ee/mediawiki/index.php/Kurss_tuule_suhtes" target="_blank" rel="noopener">Kurss tuule suhtes</a> · <a href="https://mereviki.vta.ee/mediawiki/index.php/S%C3%B5lmed" target="_blank" rel="noopener">Sõlmed</a></p>
+  </div>
+
+  <div class="footer">
+    Koostatud VENUSE meeskonnale &middot; Ridas 35 &middot; EST 319<br>
+    Head tuult ja tasast vett.
+    <br><a class="back" href="#ylesse">↑ tagasi algusesse</a>
+  </div>
+
+</div>
+</body>
+</html>
